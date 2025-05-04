@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac OS Web</title>
+    <link rel="stylesheet" href = "/U/os_interface/resources/css/widgets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/os_interface/resources/css/front_page.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Widget styles will be added here */
+    </style>
+</head>
+<body>
+    <!-- Desktop Background -->
+    <div class="desktop-background">
+
+    </div>
+    
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <div class="apple-menu">
+            <!-- Apple Logo -->
+            <div class="apple-logo-container">
+                <span class="menu-item" onclick="toggleDropdown('apple-logo-dropdown')">
+                    <i class="fab fa-apple apple-logo"></i>
+                </span>
+                <div class="dropdown" id="apple-logo-dropdown">
+
+                    <div class="dropdown-item"><span>Log Out</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>About</span><span class="shortcut">></span></div>
+                </div>
+            </div>
+            
+            <!-- Finder Menu -->
+            <div class="menu-item-container">
+                <span class="menu-item" onclick="toggleDropdown('finder-dropdown')">Finder</span>
+                <div class="dropdown" id="finder-dropdown">
+                    <div class="dropdown-item"><span>About Finder</span></div>
+                    <div class="dropdown-item"><span>Preferences...</span><span class="shortcut">Ctrl+,</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>Empty Trash...</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>Services</span><span class="dropdown-arrow">▸</span></div>
+                    <div class="dropdown-item"><span>Hide Finder</span><span class="shortcut">Ctrl+H</span></div>
+                    <div class="dropdown-item"><span>Hide Others</span><span class="shortcut">Ctrl+H</span></div>
+                    <div class="dropdown-item"><span>Quit Finder</span><span class="shortcut">Ctrl++Q</span></div>
+                </div>
+            </div>
+            
+            <!-- File Menu -->
+            <div class="menu-item-container">
+                <span class="menu-item" onclick="toggleDropdown('file-dropdown')">File</span>
+                <div class="dropdown" id="file-dropdown">
+                    <div class="dropdown-item"><span>New Finder Window</span><span class="shortcut">Crl+N</span></div>
+                    <div class="dropdown-item"><span>New Folder</span><span class="shortcut">Ctrl+N</span></div>
+                    <div class="dropdown-item"><span>Open</span><span class="shortcut">Ctrl+O</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>Get Info</span><span class="shortcut">Ctrl+I</span></div>
+                    <div class="dropdown-item"><span>Rename</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>Compress</span></div>
+                </div>
+            </div>
+            
+            <!-- Edit Menu -->
+            <div class="menu-item-container">
+                <span class="menu-item" onclick="toggleDropdown('edit-dropdown')">Edit</span>
+                <div class="dropdown" id="edit-dropdown">
+                    <div class="dropdown-item"><span>Undo</span><span class="shortcut">Ctrl+Z</span></div>
+                    <div class="dropdown-item"><span>Redo</span><span class="shortcut">Ctrl+Z</span></div>
+                    <div class="dropdown-separator"></div>
+                    <div class="dropdown-item"><span>Cut</span><span class="shortcut">Ctrl+X</span></div>
+                    <div class="dropdown-item"><span>Copy</span><span class="shortcut">Ctrl+C</span></div>
+                    <div class="dropdown-item"><span>Paste</span><span class="shortcut">Ctrl+V</span></div>
+                </div>
+            </div>
+            
+            <!-- Other Menu Items -->
+             <div class="menu-item-container">
+                 <span class="menu-item" onclick="toggleDropdown('view-dropdown')">View</span>
+                 <div class="dropdown" id="view-dropdown">
+                     <div class="dropdown-item"><span>FullScreen</span><span class="shortcut">Ctrl+Z</span></div>
+                     <div class="dropdown-item"><span>Minimize</span><span class="shortcut">Ctrl+Z</span></div>
+                     <div class="dropdown-separator"></div>
+                     <div class="dropdown-item"><span>Close</span><span class="shortcut">Ctrl+X</span></div>
+                     <div class="dropdown-item"><span>Pop-n-play</span><span class="shortcut">Ctrl+C</span></div>
+                     <div class="dropdown-item"><span>Picture-in-picture</span><span class="shortcut">Ctrl+V</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item-container">
+                    <span class="menu-item" onclick="toggleDropdown('go-dropdown')">Go</span>
+                    <div class="dropdown" id="go-dropdown">
+                        <div class="dropdown-item"><span>FullScreen</span><span class="shortcut">Ctrl+Z</span></div>
+                        <div class="dropdown-separator"></div>
+                        <div class="dropdown-item"><span>Minimize</span><span class="shortcut">Ctrl+Z</span></div>    
+                    </div>
+                </div>
+                <div class="menu-item-container">
+                    <span class="menu-item">Window</span>
+                </div>
+
+                <div class="menu-item-container">
+                    <span class="menu-item">Help</span>
+                </div>
+            </div>
+        
+        <div class="status-menu">
+            <span class="status-item"><i class="fas fa-wifi"></i></span>
+            <span class="status-item"><i class="fas fa-battery-three-quarters"></i></span>
+            <span class="status-item" id="time-display"></span>
+            <span class="status-item" id="date-display"></span>
+            <div class="status-dropdown" id="status-dropdown">
+                
+            </div>
+
+        </div>
+    </div>
+    
+    <!--widget containers-->
+    <div class="widget-container">
+        <div class="widget photo-widget" id="photo">
+            <div class="header">
+                <i class="fas fa-camera"></i>
+                <span> Photos</span>
+                <div class="actions">
+                    <i class="fas fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="widget-content">
+                <div class="photo-grid">
+                    <div class="photo-item" style="background-image: url('https://picsum.photos/300/200?random=1')"></div>
+                    <div class="photo-item" style="background-image: url('https://picsum.photos/300/200?random=2')"></div>
+                    <div class="photo-item" style="background-image: url('https://picsum.photos/300/200?random=3')"></div>
+                    <div class="photo-item" style="background-image: url('https://picsum.photos/300/200?random=4')"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="widget notes-widget">
+            <div class="header">
+                <i class="fas fa-square-pen"></i>
+                <span>Thansk for the notes</span>
+                <div class="actions">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="widget-content">
+                <div class="note-editor" contenteditable="true">Click to edit...</div>
+                <div class="notes-items">
+                    <div class="note-item">
+                        <div class="note-text">Meeting with design team at 2pm</div>
+                        <div class="note-date">Today, 10:45 AM</div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-text">Meeting with design team at 2pm</div>
+                        <div class="note-date">Today, 10:45 AM</div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-text">Meeting with design team at 2pm</div>
+                        <div class="note-date">Today, 10:45 AM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget calender-widget">
+            <div class="header">
+                <i class="fas fa-calendar"></i>
+                <span>Calendar</span>
+                <div class="actions">
+                    <i class="fas fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="widget-content">
+                <div class="calendar-header">
+                    <span id="current-month">March 2025</span>
+                </div>
+                <div class="calender-grid">
+                    <div class="weekdays">
+                        <span>S</span>
+                        <span>M</span>
+                        <span>T</span>
+                        <span>W</span>
+                        <span>Th</span>
+                        <span>F</span>
+                        <span>Sa</span>
+                    </div>
+                    <div class="calender-days" id="calender-days">
+                        <!-- javascript filling-->
+                    </div>
+                </div>
+                <div class="calender-events">
+                    <div class="event-item">
+                        <div class="event-time">10:00 AM</div>
+                        <div class="event-title">Team Standup</div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-time">2:00 PM</div>
+                        <div class="event-title">Design Review</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget stats-widget">
+            <div class="header">
+                <i class="fas fa-chart-simple"></i>
+                <span>System</span>
+                <div class="actions">
+                    <i class="fas fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="widget-content">
+                <div class="stat-item">
+                    <div class="stat-info">
+                        <span class="stat-label">CPU</span>
+                        <span class="stat-value">65%</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-progress cpu-progress"></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-info">
+                        <span class="stat-label">Memory</span>
+                        <span class="stat-value">42%</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-progress memory-progress"></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-info">
+                        <span class="stat-label">Disk</span>
+                        <span class="stat-value">78%</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-progress disk-progress"></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-info">
+                        <span class="stat-label">Network</span>
+                        <span class="stat-value">35%</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-progress network-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Dock -->
+    <div class="dock-container">
+        <div class="dock">
+            <div class="dock-items">
+                <!-- Finder -->
+                <div class="dock-item" data-app="finder" title="Finder">
+                   <img src="/os_interface/icon/dock/finder.png"/>
+                    <div class="indicator"></div>
+                </div>
+                
+                <!-- Calculator -->
+                <div class="dock-item" data-app="calculator" title="Calculator">
+                   <img src="/os_interface/icon/dock/calculator.png"/>
+                    <div class="indicator"></div>
+                </div>
+                
+                <!-- Notes -->
+                <div class="dock-item" data-app="notes" title="Notes">
+                    <img src="/os_interface/icon/dock/notes.png"/>
+                    <div class="indicator"></div>
+                </div>
+                <div class="dock-item" data-app="safari" title="Safari">
+                    <img src="/os_interface/icon/Launchpad/safari.png"/>
+                    <div class="indicator"></div>
+                </div>
+                <!-- Maps -->
+                <div class="dock-item" data-app="maps" title="Maps">
+                    <img src="/os_interface/icon/dock/maps.png"/>
+                    <div class="indicator"></div>
+                </div>
+
+                <div class="dock-item" data-app="appstore" title="appstore">
+                    <img src="/os_interface/icon/dock/appstore.png"/>
+                    <div class="indicator"></div>
+                </div>
+
+                <div class="dock-item" data-app="terminal" title="Terminal">
+                    <img src="/os_interface/icon/dock/terminal.png"/>
+                    <div class="indicator"></div>
+                </div>
+
+                <!-- Launchpad -->
+                <div class="dock-item" data-app="launchpad" title="Launchpad">
+                    <img src="/os_interface/icon/dock/launchpad.png"/>
+                    <div class="indicator"></div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Window Container -->
+    <div id="window-container"></div>
+    
+    <!-- Launchpad Container -->
+    <div id="launchpad" class="launchpad hidden">
+        <div class="launchpad-header">
+            <div class="launchpad-close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <div class="launchpad-grid">
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/activitymonitor.png" alt="app">
+            <span>ActivityMonitor</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/appstore.png" alt="app">
+            <span>AppStore</span></div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/calculator.png" alt="app">
+            <span>Calculator</span></div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/calendar.png" alt="app">
+                <span>Calender</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/contacts.png" alt="app">
+                <span>Mail</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/dictionary.png" alt="app">
+                <span>Contacts</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/Home.png" alt="app">
+                <span>dictionary</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/mail.png" alt="app">
+                <span>Home</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/messages.png" alt="app">
+                <span>Messages</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/netnewswire.png" alt="app">
+                <span>NetNewsWire</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/numbers.png" alt="app">
+                <span>Numbers</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/pages.png" alt="app">
+                <span>Pages</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/podcasts.png" alt="app">
+                <span>Podcasts</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/safari.png" alt="app">
+                <span>Safari</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/siri.png" alt="app">
+                <span>Siri</span>
+            </div>
+            <div class="app-icon"><img src="/os_interface/icon/Launchpad/zoom.png" alt="app">
+                <span>Zoom</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/os_interface/resources/js/test.js"></script>
+    <script src="/os_interface/resources/js/launchpad.js"></script>
+    <script src="/os_interface/resources/js/others.js"></script>
+
+</body>
+</html>

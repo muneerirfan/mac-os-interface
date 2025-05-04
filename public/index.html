@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac OS Login</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&amp;display=swap'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/os_interface/resources/css/index_linker.css">
+</head>
+<body class="night" sysDesktopBackGround>
+    <div class="lockScreen">
+        <div class="user-container">
+            <div class="user" data-user="User-One" style="background-image: url(/os_interface/images/avatar.png);"></div>
+            <div class="user-name">
+                <p>  Signup</p>
+            </div>
+        </div>
+
+        <form action="/os_interface/src/components/signup.php" method="post">
+            <div class="LockScreenLogIn">
+                <input type="text" name="lastname" class="SystemLockInput" placeholder="Enter Name" required autocomplete="off"/>
+                <input type="text" name="Email" class="SystemLockInput" placeholder="Enter email" required autocomplete="off"/>
+                <input type="password" name="password" class="SystemLockInput" placeholder="Enter Password" required autocomplete="off"/>
+                
+                <input type="submit" class="login" value="Sign Up" style="border-radius: 5px; width: 100%; height: 100%; padding: 0.8rem;">
+            </div>
+        </form>
+
+        <div class="inqury" style="text-align: center; margin-top: 1rem;">
+            <p>Already have an account?</p>
+            <a class="link" href="/os_interface/public/login.html" style="text-decoration:none;"">
+                <div class="login empty" style="border-radius: 5px; width: 100%; height: 100%; padding: 0.8rem; color: white; font-size: 600;">
+                    <p id="login">login</p>
+                </div>
+            </a>
+        </div> 
+    </div>
+</body>
+</html>

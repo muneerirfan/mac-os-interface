@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac OS Login</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&amp;display=swap'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/os_interface/resources/css/index_linker.css">
+    <link rel="stylesheet" href="/os_interface/resources/css/login.css">
+</head>
+<body class="night">
+            <div class="user-name">
+                <p>LOG-IN</p>
+            </div>
+        <form action="/os_interface/src/components/login.php" method="post">
+            <div class="LockScreenLogIn">
+                <input type="text" name="username" class="SystemLockInput" placeholder="Enter Name" required autocomplete="off"/>
+                <input type="password" name="password" class="SystemLockInput" placeholder="Enter Password" required autocomplete="off"/>
+                
+                <input type="submit" class="login" value="Log in" style="border-radius: 5px;padding: 0.8rem;">
+
+            </div>
+        </form>
+
+        <div class="inqury" style="text-align: center; margin-top: 1rem;">
+            <!-- Help Button -->
+             <p>Forgot password</p>
+            <a class="link" href="/os_interface/public/forgot_password.html" style="text-decoration:none;">
+                <div class="login empty">
+                    <i class="bi bi-key"></i>
+                </div>
+            </a>
+            <br>
+        </div>
+        <div class="inqury">
+            <p>Don't have an account?</p>
+            <a class="link" href="/os_interface/public/index.html" style="text-decoration:none;">
+                <div class="login empty" style="border-radius: 5px; width: 100%; height: 100%; padding: 0.8rem; color: white; font-size: 600;">
+                    <p>signup</p>
+                </div>
+            </a>
+        </div>
+        <div class="inqury">
+            <p>change password?</p>
+            <a class="link" href="/os_interface/public/change_pass.html" style="text-decoration:none;">
+                <div class="login empty" style="border-radius: 5px; width: 100%; height: 100%; padding: 0.8rem; color: white; font-size: 600;">
+                    <p>change</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
